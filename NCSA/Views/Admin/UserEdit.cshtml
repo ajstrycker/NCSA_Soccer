@@ -1,0 +1,47 @@
+﻿@model NCSA.ViewModel.UserEditVM
+
+@{
+    ViewBag.Title = "AdminUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin">
+    <div class="common-header">
+        <div class="common-header-title">
+            Edit @Model.UserName
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__edit">
+        @using (Html.BeginForm("UserEdit", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "" })
+            @Html.HiddenFor(model => model.UserId)
+
+            <a href="/admin/users" class="admin__edit__link">&larr; Back to All Users</a>
+
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.CurrentRole, htmlAttributes: new { @class = "adminLabel" })
+                @Html.DropDownListFor(model => model.CurrentRole, Model.RoleNames, "No Role", new { @class = "adminInput" })
+                @Html.ValidationMessageFor(m => m.CurrentRole, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                <input type="submit" value="Submit" class="bttn bttn-secondary" />
+            </div>
+        }
+    </div>
+</div>
+

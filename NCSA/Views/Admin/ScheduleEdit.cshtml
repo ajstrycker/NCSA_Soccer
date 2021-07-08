@@ -1,0 +1,62 @@
+﻿@model NCSA.ViewModel.AdminScheduleEditVM
+
+@{
+    ViewBag.Title = "AdminSchedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin">
+    <div class="common-header">
+        <div class="common-header-title">
+            Edit Game
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__edit">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "" })
+            @Html.HiddenFor(model => model.Game.ID)
+
+            <a href="/admin/schedule" class="admin__edit__link">&larr; Back to All Games</a>
+
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Game.HomeTeamID, htmlAttributes: new { @class = "adminLabel" })
+                @Html.DropDownListFor(model => model.Game.HomeTeamID, new SelectList(Model.Teams, "Key", "Value"), "Choose Home Team", new { @class = "adminInput" })
+                @Html.ValidationMessageFor(m => m.Game.HomeTeamID, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Game.AwayTeam2ID, htmlAttributes: new { @class = "adminLabel" })
+                @Html.DropDownListFor(model => model.Game.AwayTeam2ID, new SelectList(Model.Teams, "Key", "Value"), "Choose Away Team", new { @class = "adminInput" })
+                @Html.ValidationMessageFor(m => m.Game.AwayTeam2ID, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Game.GameDateTime, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Game.GameDateTime, new { placeholder = "Game Date/Time", htmlAttributes = new { @class = "adminInput", spellcheck = "false", placeholder = "12/20/2020 10:00AM" } })
+                @Html.ValidationMessageFor(m => m.Game.GameDateTime, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Game.CenterRef, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Game.CenterRef, new { placeholder = "Center Ref", htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Game.CenterRef, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Game.AR1, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Game.AR1, new { placeholder = "AR 1", htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Game.AR1, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Game.AR2, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Game.AR2, new { placeholder = "AR 2", htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Game.AR2, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                <input type="submit" value="Submit" class="bttn bttn-secondary" />
+            </div>
+        }
+    </div>
+</div>
+

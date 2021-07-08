@@ -1,0 +1,56 @@
+﻿@model List<NCSA.ViewModel.AdminScheduleIndexVM>
+
+@{
+    ViewBag.Title = "AdminSchedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin">
+    @Html.AntiForgeryToken()
+
+    <div class="common-header">
+        <div class="common-header-title">
+            Manage Schedule
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__container">
+
+        <div class="admin__create">
+            <a href="/admin/schedulecreate" class="admin__btngroup-btn bttn bttn-secondary">Create New</a>
+        </div>
+
+        @foreach (var game in Model)
+        {
+            <div class="admin__container__item common-box" id="@game.Id">
+                <div class="admin__container__item-attr" id="home_@game.Id">
+                    <span>Home Team:</span> @game.HomeTeam
+                </div>
+                <div class="admin__container__item-attr" id="away_@game.Id">
+                    <span>Away Team:</span> @game.AwayTeam
+                </div>
+                <div class="admin__container__item-attr" id="date_@game.Id">
+                    <span>Date/Time:</span> @game.GameDateTime
+                </div>
+                @*@if (game.CenterRef != null)
+                    {
+                        <div class="admin__container__item-attr">
+                            <span>Center Ref:</span> @game.CenterRef
+                        </div>
+                    }
+                    @if (game.ARs != null)
+                    {
+                        <div class="admin__container__item-attr">
+                            <span>AR's:</span> @game.ARs
+                        </div>
+                    }*@
+                <div class="admin__container__item-attr">
+                    @Html.ActionLink("Edit", "ScheduleEdit", new { id = game.Id }, new { @class = "bttn bttn-link mr-sm" }) |
+                    <a class="bttn bttn-link ml-sm" onclick="ConfirmDelete('@game.Id', 'schedule')">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

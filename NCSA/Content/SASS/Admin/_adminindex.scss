@@ -1,0 +1,6 @@
+﻿.admin {
+    display: grid;
+    grid-template-rows: 20vh 1fr minmax(75vh, 100%);
+    grid-template-columns: $template-columns;
+    color: $color-grey-dark-2;
+}

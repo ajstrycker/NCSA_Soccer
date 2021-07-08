@@ -1,0 +1,60 @@
+﻿@model NCSA.ViewModel.PlayerVM
+@{
+    ViewBag.Title = "AdminPlayers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem { Text = "All", Value = "all", Selected = true });
+
+    foreach (var grade in Model.ListOfGrades)
+    {
+        listItems.Add(new SelectListItem { Text = grade.Value.ToString(), Value = grade.Key.ToString() });
+    }
+}
+
+<div class="admin">
+    <div class="common-header">
+        <div class="common-header-title">
+            Players
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__container">
+        <div class="admin__create">
+            <div class="admin__create-item">
+                <div class="admin__create-desc mr-sm">Search</div>
+                <input type="text" class="admin__create-input mr-sm" id="playersearch" />
+            </div>
+            <div class="admin__create-item">
+                <div class="admin__create-desc">Filter By Team</div>
+                @Html.DropDownList("grades", listItems, new { id = "gradesFilter", @class = "admin__create-dropdown" })
+            </div>
+        </div>
+
+        @foreach (var player in Model.Players)
+        {
+            <div class="admin__container__item common-box" id="@player.ID">
+                <div class="admin__container__item-attr pname">
+                    <span>Name:</span> @player.Name
+                </div>
+                <div class="admin__container__item-attr pdesc">
+                    <span>Team:</span> @player.TeamDesc
+                </div>
+                <div class="admin__container__item-attr pphone">
+                    <span>Phone:</span> @player.PhoneNumber
+                </div>
+                <div class="admin__container__item-attr pemail">
+                    <span>Email:</span> <a href="mailto:@player.Email" class="bttn bttn-link">@player.Email</a>
+                </div>
+                <div class="admin__container__item-attr">
+                    @Html.ActionLink("Details", "playerDetails", new { id = player.ID }, new { @class = "bttn bttn-link mr-sm" }) |
+                    <a class="bttn bttn-link ml-sm" onclick="ConfirmDelete('@player.ID', 'player')">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@model List<NCSA.ViewModel.UserVM>
+@{
+    ViewBag.Title = "AdminUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin">
+    @Html.AntiForgeryToken()
+
+    <div class="common-header">
+        <div class="common-header-title">
+            Manage Users
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__container">
+
+        <div class="admin__create">
+            <a href="/account/register" class="admin__btngroup-btn bttn bttn-secondary">Create New</a>
+        </div>
+
+        @foreach (var user in Model)
+        {
+        <div class="admin__container__item common-box" id="@user.UserId">
+            <div class="admin__container__item-attr" id="un_@user.UserId">
+                <span>Username:</span> @user.Username
+            </div>
+            <div class="admin__container__item-attr">
+                <span>Roles:</span> @user.RoleName
+            </div>
+            @if (user.IsLockedout)
+            {
+                <div class="admin__container__item-attr" id="lock_@user.UserId">
+                    <span>User is Locked: </span><a href="javascript:UnlockUser('@user.UserId')" class="bttn bttn-link">Unlock User?</a>
+                </div>
+            }
+            <div class="admin__container__item-attr d-inline">
+                @Html.ActionLink("Edit", "UserEdit", new { userId = user.UserId }, new { @class = "bttn bttn-link" }) |
+                <a class="bttn bttn-link" onclick="ConfirmDelete('@user.UserId', 'user')">Delete</a> |
+                @Html.ActionLink("Reset Password", "SetPassword", "Manage", new { id = user.UserId }, new { @class = "bttn bttn-link" }) 
+            </div>
+        </div>
+        }
+    </div>
+</div>

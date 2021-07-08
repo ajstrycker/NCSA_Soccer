@@ -1,0 +1,26 @@
+﻿@model List<NCSA.ViewModel.LocationVM>
+@{
+    ViewBag.Title = "Locations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="location">
+    <div class="location__header">
+        <div class="location__header-title">
+            All Locations By Team
+        </div>
+    </div>
+
+    <div class="location__loc">
+        @foreach (var loc in Model)
+        {
+        <div class="location__loc__item">
+            <div class="location__loc__item-team @loc.TeamName-full">@loc.TeamTitle</div>
+            <div class="location__loc__item-address mt-md">@loc.Location.StreetName</div>
+            <div class="location__loc__item-address">@loc.Location.City @loc.Location.State, @loc.Location.Zip</div>
+            <a href="http://maps.google.com/maps?q=@loc.Location.Latitude,@loc.Location.Longitude&z=15" class="location__loc__item-link @loc.TeamName-text" target="_blank">Click To View on Map <i class="fa fa-map"></i></a>
+        </div>
+        }
+    </div>
+</div>
+

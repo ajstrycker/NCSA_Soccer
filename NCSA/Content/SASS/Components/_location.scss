@@ -1,0 +1,96 @@
+﻿.location {
+    display: grid;
+    grid-template-rows: 20vh 1fr;
+    grid-template-columns: $template-columns;
+
+    &__header {
+        grid-column: full-start / full-end;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: $gradient-1;
+            background-size: cover;
+            background-position: top;
+            -webkit-clip-path: polygon(33% 0, 100% 30%, 100% 100%, 0 99%, 0 0);
+            clip-path: polygon(25% 0, 100% 0, 100% 85vh, 0 99%, 0 0);
+            z-index: -1;
+        }
+
+        &-title {
+            color: #fff;
+            font-size: 6rem;
+            font-weight: 700;
+        }
+    }
+
+    &__loc {
+        grid-column: center-start / center-end;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(33rem, 1fr));
+        grid-gap: 5rem;
+        margin: 4rem 0;
+
+        &__item {
+            border-radius: 1rem;
+            box-shadow: $shadow-md;
+            color: $color-grey-dark-2;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 10rem 1fr;
+            justify-items: center;
+
+            &-team {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 2rem;
+                font-size: 3rem;
+                font-weight: 500;
+                color: white;
+                width: 100%;
+                height: 100%;
+            }
+
+            &-address {
+                font-size: 2.5rem;
+            }
+
+            &-link {
+                font-size: 2rem;
+                font-weight: 500;
+                text-decoration: none;
+                padding: 2rem 0 4rem 0;
+                transition: color .2s;
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+        &__header {
+            &-title {
+                font-size: 5rem;
+            }
+        }
+    }
+
+    @media only screen and (max-width: $bp-small) {
+        &__header {
+            &-title {
+                font-size: 4rem;
+            }
+        }
+    }
+}

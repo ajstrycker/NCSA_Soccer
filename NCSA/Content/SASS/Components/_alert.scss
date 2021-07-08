@@ -1,0 +1,99 @@
+﻿.alerts {
+    z-index: 2000;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
+
+@media only screen and (max-width: $bp-small) {
+    .alerts {
+        right: unset;
+        left: 0;
+        width: 100vw;
+    }
+}
+
+.in-out {
+    animation-name: dismiss;
+    animation-duration: 300ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: backwards;
+    animation-direction: reverse;
+    animation-delay: 0s,100ms;
+}
+
+.alerts .inner {
+    display: block;
+    padding: 2rem;
+    margin: 1.5rem;
+    border-radius: .5rem;
+    font-size: 1.5rem;
+    border: 1px solid rgb(180,180,180);
+    background-color: rgb(212,212,212);
+}
+
+.alerts .close {
+    float: right;
+    margin: 2rem 2rem 0px 0px;
+    cursor: pointer;
+}
+
+.alerts .inner, .alerts .close {
+    color: rgb(88,88,88);
+}
+
+.alerts input {
+    display: none;
+}
+
+.alerts input:checked ~ * {
+    animation-name: dismiss,hide;
+    animation-duration: 300ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-delay: 0s,100ms;
+}
+
+.alerts.error .inner {
+    border: 1px solid rgb(238,211,215);
+    background-color: rgb(242,222,222);
+}
+
+.alerts.error .inner, .alerts.error .close {
+    color: rgb(185,74,72);
+}
+
+.alerts.success .inner {
+    background-color: #DFF2BF;
+}
+
+.alerts.success .inner, .alerts.success .close {
+    color: #4F8A10;
+}
+
+@keyframes dismiss {
+    0% {
+        opacity: 1;
+    }
+
+    90%, 100% {
+        opacity: 0;
+        font-size: 0.1px;
+        transform: scale(0);
+    }
+}
+
+@keyframes hide {
+    100% {
+        height: 0px;
+        width: 0px;
+        overflow: hidden;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+    }
+}
+  

@@ -1,0 +1,91 @@
+﻿@model NCSA.ViewModel.AdminTeamEditVM
+
+@{
+    ViewBag.Title = "AdminTeams";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin">
+    <div class="common-header">
+        <div class="common-header-title">
+            Edit Game
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__edit">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "" })
+            @Html.HiddenFor(model => model.Team.TeamId)
+
+            <a href="/admin/teams" class="admin__edit__link">&larr; Back to Teams</a>
+
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.TownName, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Team.TownName, new { placeholder = "Town Name", htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Team.TownName, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.Description, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Team.Description, new { placeholder = "Description", htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Team.Description, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                <div class="input__checkbox">
+                    @Html.CheckBoxFor(model => model.Team.IsWalkertonTeam, new { id = "iswalkerton" })
+                    <label for="iswalkerton">Is a Walkerton Team?</label>
+                    @Html.ValidationMessageFor(model => model.Team.IsWalkertonTeam, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.GradeLevel, htmlAttributes: new { @class = "adminLabel" })
+                @Html.DropDownListFor(model => model.Team.GradeLevel, new SelectList(Model.GradeLevelList, "Key", "Value"), new { @class = "adminInput" })
+                @Html.ValidationMessageFor(m => m.Team.GradeLevel, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.GenderOfTeam, htmlAttributes: new { @class = "adminLabel" })
+                @Html.DropDownListFor(model => model.Team.GenderOfTeam, new List<SelectListItem> {
+                        new SelectListItem { Value = "M", Text = "Male"},
+                        new SelectListItem { Value = "F", Text = "Female"}
+                    }, new { @class = "adminInput" })
+                @Html.ValidationMessageFor(m => m.Team.GenderOfTeam, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.Coach1, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Team.Coach1, new { placeholder = "Head Coach", htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Team.Coach1, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.Coach1Phone, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Team.Coach1Phone, new { placeholder = "Head Coach Phone Number", htmlAttributes = new { id = "phone", @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Team.Coach1Phone, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.Coach2, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Team.Coach2, new { placeholder = "Assistant Coach", htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Team.Coach2, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.PracticeTimes, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Team.PracticeTimes, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Team.PracticeTimes, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.WhatToBring, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Team.WhatToBring, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Team.WhatToBring, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Team.LocationId, htmlAttributes: new { @class = "adminLabel" })
+                @Html.DropDownListFor(model => model.Team.LocationId, new SelectList(Model.Locations, "Key", "Value"), new { @class = "adminInput" })
+                @Html.ValidationMessageFor(m => m.Team.LocationId, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                <input type="submit" value="Submit" class="bttn bttn-secondary" />
+            </div>
+        }
+    </div>
+</div>

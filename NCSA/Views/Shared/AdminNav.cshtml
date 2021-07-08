@@ -1,0 +1,115 @@
+﻿@using NCSA.Models
+
+<div class="admin__nav">
+    @if (User.IsInRole(RoleName.Admin))
+    {
+        if (ViewBag.Title == "AdminPlayers")
+        {
+            <a class="admin__nav-item admin__nav-active" href="/admin/players">
+                Players
+            </a>
+        }
+        else
+        {
+            <a class="admin__nav-item" href="/admin/players">
+                Players
+            </a>
+        }
+    }
+
+    @if (User.IsInRole(RoleName.Admin) || User.IsInRole(RoleName.CommunityLeader))
+    {
+        if (ViewBag.Title == "AdminTeams")
+        {
+            <a class="admin__nav-item admin__nav-active" href="/admin/teams">
+                Teams
+            </a>
+        }
+        else
+        {
+            <a class="admin__nav-item" href="/admin/teams">
+                Teams
+            </a>
+        }
+    }
+
+    @if (User.IsInRole(RoleName.Admin) || User.IsInRole(RoleName.CommunityLeader))
+    {
+        if (ViewBag.Title == "AdminSchedule")
+        {
+            <a class="admin__nav-item admin__nav-active" href="/admin/schedule">
+                Schedule
+            </a>
+        }
+        else
+        {
+            <a class="admin__nav-item" href="/admin/schedule">
+                Schedule
+            </a>
+        }
+    }
+
+    @if (User.IsInRole(RoleName.Admin) || User.IsInRole(RoleName.CommunityLeader))
+    {
+        if (ViewBag.Title == "AdminLocations")
+        {
+            <a class="admin__nav-item admin__nav-active" href="/admin/locations">
+                Locations
+            </a>
+        }
+        else
+        {
+            <a class="admin__nav-item" href="/admin/locations">
+                Locations
+            </a>
+        }
+    }
+
+    @if (User.IsInRole(RoleName.Admin))
+    {
+        if (ViewBag.Title == "AdminUsers")
+        {
+            <a class="admin__nav-item admin__nav-active" href="/admin/users">
+                Users
+            </a>
+        }
+        else
+        {
+            <a class="admin__nav-item" href="/admin/users">
+                Users
+            </a>
+        }
+    }
+
+    @if (User.IsInRole(RoleName.Admin))
+    {
+        if (ViewBag.Title == "AdminLogs")
+        {
+            <a class="admin__nav-item admin__nav-active" href="/admin/logs">
+                Logs
+            </a>
+        }
+        else
+        {
+            <a class="admin__nav-item" href="/admin/logs">
+                Logs
+            </a>
+        }
+    }
+
+    @if (User.IsInRole(RoleName.Admin) || User.IsInRole(RoleName.Referee))
+    {
+        if (ViewBag.Title == "AdminReferee")
+        {
+            <a class="admin__nav-item admin__nav-active" href="/admin/referee">
+                Referee
+            </a>
+        }
+        else
+        {
+            <a class="admin__nav-item" href="/admin/referee">
+                Referee
+            </a>
+        }
+    }
+</div>

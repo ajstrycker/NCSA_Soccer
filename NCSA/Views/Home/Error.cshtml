@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="error__page">
+    <div class="common-header">
+        <div class="common-header-title">
+            Error
+        </div>
+    </div>
+
+    <div class="error__page__message common-box">
+        @if (ViewBag.Message != "")
+        {
+            @ViewBag.Message
+        }
+        else
+        {
+            <div>There was an error with the app... </div>
+        }
+    </div>
+</div>
+
+

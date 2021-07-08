@@ -1,0 +1,35 @@
+﻿@model List<NCSA.Models.Log>
+@{
+    ViewBag.Title = "AdminLogs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin">
+    @Html.AntiForgeryToken()
+
+    <div class="common-header">
+        <div class="common-header-title">
+            Logs
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__container">
+
+        @foreach (var loc in Model)
+        {
+            <div class="admin__container__item common-box">
+                <div class="admin__container__item-attr">
+                    <span>Message:</span> @loc.Message
+                </div>
+                <div class="admin__container__item-attr">
+                    <span>Stack Trace:</span> @loc.Stacktrace
+                </div>
+                <div class="admin__container__item-attr">
+                    <span>Date/Time:</span> @loc.Date
+                </div>
+            </div>
+        }
+    </div>
+</div>

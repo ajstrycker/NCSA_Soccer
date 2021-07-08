@@ -1,0 +1,43 @@
+﻿@model List<NCSA.Models.Location>
+@{
+    ViewBag.Title = "AdminLocations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin">
+    @Html.AntiForgeryToken()
+
+    <div class="common-header">
+        <div class="common-header-title">
+            Manage Locations
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__container">
+
+        <div class="admin__create">
+            <a href="/admin/locationcreate" class="admin__btngroup-btn bttn bttn-secondary">Create New</a>
+        </div>
+
+        @foreach (var loc in Model)
+        {
+            <div class="admin__container__item common-box" id="@loc.ID">
+                <div class="admin__container__item-attr" id="addr_@loc.ID">
+                    <span>Address: </span> @loc.StreetName
+                </div>
+                <div class="admin__container__item-attr" id="citystzip_@loc.ID">
+                    <span>City/State/Zip: </span> @loc.City @loc.State, @loc.Zip
+                </div>
+                <div class="admin__container__item-attr" id="longlat_@loc.ID">
+                    <span>Longitude / Latitude: </span> @loc.Longitude / @loc.Latitude
+                </div>
+                <div class="admin__container__item-attr">
+                    @Html.ActionLink("Edit", "LocationEdit", new { id = loc.ID }, new { @class = "bttn bttn-link mr-sm" }) |
+                    <a class="bttn bttn-link ml-sm" onclick="ConfirmDelete('@loc.ID', 'location')">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

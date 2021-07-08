@@ -1,0 +1,51 @@
+﻿@model List<NCSA.Models.Team>
+
+@{
+    ViewBag.Title = "Teams";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="teampage">
+    <div class="common-header">
+        <div class="common-header-title">
+            Walkerton Teams
+        </div>
+    </div>
+
+    <div class="teampage__teams">
+        @foreach (var team in Model)
+        {
+        <div class="teampage__teams__team common-box">
+            <div class="teampage__teams__team-desc">@team.Description</div>
+            <div class="teampage__teams__team-attr"><span>Head Coach:</span> @team.Coach1</div>
+            @if (!string.IsNullOrEmpty(team.Coach1Phone))
+            {
+                <div class="teampage__teams__team-attr"><span>Head Coach Phone Number:</span> @team.Coach1Phone</div>
+            }
+            <div class="teampage__teams__team-attr"><span>Assistant Coach:</span> @team.Coach2</div>
+
+            @if (!string.IsNullOrEmpty(team.PracticeTimes))
+            {
+                <div class="teampage__teams__team-attr"><span>Practice Times:</span></div>
+                <ul class="teampage__teams__team-list">
+                    @foreach (var item in team.PracticeTimes.Split(','))
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            }
+
+            @if (!string.IsNullOrEmpty(team.WhatToBring))
+            {
+                <div class="teampage__teams__team-attr"><span>What to Bring:</span></div>
+                <ul class="teampage__teams__team-list">
+                    @foreach (var item in team.WhatToBring.Split(','))
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            }
+        </div>
+        }
+    </div>
+</div>

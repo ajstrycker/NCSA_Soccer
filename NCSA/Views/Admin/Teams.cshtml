@@ -1,0 +1,68 @@
+﻿@model List<NCSA.ViewModel.AdminTeamVM>
+
+@{
+    ViewBag.Title = "AdminTeams";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem { Text = "All", Value = "all", Selected = true });
+
+    foreach (var team in Model)
+    {
+        if (!listItems.Any(c => c.Value == team.Team.TownName.ToLower()))
+        {
+            listItems.Add(new SelectListItem { Text = team.Team.TownName, Value = team.Team.TownName.ToLower() });
+        }
+    }
+}
+
+<div class="admin">
+    @Html.AntiForgeryToken()
+
+    <div class="common-header">
+        <div class="common-header-title">
+            Manage Teams
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__teams">
+        <div class="admin__create">
+            <a href="/admin/teamscreate" class="admin__btngroup-btn bttn bttn-secondary">Create New</a>
+            @Html.DropDownList("towns", listItems, new { @class = "admin__teams__create-dropdown" })
+
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="admin__teams__item common-box" id="@item.Team.TeamId">
+                <div class="admin__teams__item-town">
+                    @item.Team.TownName
+                </div>
+                <div class="admin__teams__item-description">
+                    @item.Team.Description
+                </div>
+
+                @if (item.Team.Coach1 != "")
+                {
+                    <div class="admin__teams__item-attr coach">
+                        <span class="bold">Coaches:</span> @item.Team.Coach1
+                        @if (item.Team.Coach2 != null)
+                        {
+                            <span>and</span> @item.Team.Coach2
+                        }
+                    </div>
+                }
+                <div class="admin__teams__item-attr">
+                    <span class="bold">Game Location Address:</span> @item.Location.StreetName @item.Location.City @item.Location.State, @item.Location.Zip
+                </div>
+                <div class="admin__btngroup">
+                    <a href="/admin/teamsedit/@item.Team.TeamId" class="admin__btngroup-btn bttn bttn-secondary">Edit</a>
+                    <a class="admin__btngroup-btn bttn bttn-secondary" onclick="ConfirmDelete('@item.Team.TeamId', 'team')">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

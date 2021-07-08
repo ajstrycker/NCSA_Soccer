@@ -1,0 +1,160 @@
+﻿//@import url('https://fonts.googleapis.com/css?family=Montserrat|Playfair+Display&display=swap');
+
+$color-primary: #ff3377;
+$color-primary-light: #ff4583;
+$color-primary-dark: #c9285e;
+
+$color-grey-light-1: #f9f7f6;
+$color-grey-light-2: #ebebeb;
+$color-grey-light-3: #aaa;
+$color-grey-light-4: #7a7979;
+
+$color-grey-dark-1: #737373;
+$color-grey-dark-2: #666666;
+$color-grey-dark-3: #545454;
+
+$color-red: #e82a3a;
+$font-primary: 'Montserrat', sans-serif;
+$font-secondary: 'Playfair Display', serif;
+
+$laville: #1d30f4;
+$laville-light: #2e41ff;
+$bremen: #1c9a12;
+$bremen-light: #20bb13;
+$argos: #ccc117;
+$argos-light: #ded215;
+
+$shadow-xs: 0 .7rem 1rem -1px rgba(0,0,0,0.2);
+$shadow-sm: 0 1rem 2rem rgba(#000, .2);
+$shadow-md: 0 1.5rem 3rem rgba(#000, .2);
+$shadow-lg: 0 3rem 4rem rgba(#000, .35);
+$shadow-dark: 0 3rem 4rem rgba(#000, .5);
+
+$shadow-primary-sm: 0 .6rem 1rem rgba($color-primary, .5);
+$shadow-primary-md: 0 1.5rem 3rem rgba($color-primary, .2);
+$shadow-primary-lg: 0 3rem 4rem rgba($color-primary, .35);
+
+$gradient-1: linear-gradient( to right bottom, rgba($color-primary-light, .9), rgba($color-primary-dark, .95));
+$gradient-transparent: linear-gradient( to right bottom, rgba($color-primary-light, .6), rgba($color-primary-dark, .7));
+$gradient-dark: linear-gradient( to right bottom, rgba($color-grey-dark-1, .9), rgba($color-grey-dark-2, .95));
+
+$gradient-walkerton: linear-gradient(128deg, rgba(255,51,119,1) 0%, rgba(255,78,137,0.8631827731092436) 50%, rgba(255,107,156,0.42620798319327735) 100%);
+
+.walkerton-partial {
+    background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 10%, rgba(255,255,255,1) 10%);
+}
+
+.laville-partial {
+    background: linear-gradient(90deg, $laville 0%, $laville-light 10%, rgba(255,255,255,1) 10%);
+}
+
+.bremen-partial {
+    background: linear-gradient(90deg, $bremen 0%, $bremen-light 10%, rgba(255,255,255,1) 10%);
+}
+
+.argos-partial {
+    background: linear-gradient(90deg, $argos 0%, $argos-light 10%, rgba(255,255,255,1) 10%);
+}
+
+.walkerton-full {
+    background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 100%, rgba(255,255,255,1) 100%);
+}
+
+.laville-full {
+    background: linear-gradient(90deg, $laville 0%, $laville-light 100%, rgba(255,255,255,1) 100%);
+}
+
+.bremen-full {
+    background: linear-gradient(90deg, $bremen 0%, $bremen-light 100%, rgba(255,255,255,1) 100%);
+}
+
+.argos-full {
+    background: linear-gradient(90deg, $argos 0%, $argos-light 100%, rgba(255,255,255,1) 100%);
+}
+
+.walkerton-text {
+    color: $color-primary;
+    transition: color .2s;
+
+    &:hover {
+        color: $color-primary-dark;
+    }
+}
+
+.laville-text {
+    color: $laville;
+    transition: color .2s;
+
+    &:hover {
+        color: $laville-light;
+    }
+}
+
+.bremen-text {
+    color: $bremen;
+    transition: color .2s;
+
+    &:hover {
+        color: $bremen-light;
+    }
+}
+
+.argos-text {
+    color: $argos;
+    transition: color .2s;
+
+    &:hover {
+        color: $argos-light;
+    }
+}
+
+// RESPONSIVE BREAKPOINTS
+$bp-largest: 75em; // 1200px
+$bp-large: 62.5em; // 1000px
+$bp-medium: 50em; // 800px;
+$bp-small: 37.5em; // 600px;
+
+$template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 18rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; // 10px/16px = 62.5% -> 1rem = 10px
+
+    @media only screen and (max-width: $bp-large) {
+        font-size: 45%;
+    }
+
+    @media only screen and (max-width: $bp-largest) {
+        font-size: 50%;
+    }
+}
+
+body {
+    font-family: $font-primary;
+    color: $color-grey-dark-2;
+    font-weight: 300;
+    line-height: 1.6;
+    background-color: $color-grey-light-1;
+    position: relative;
+    background-color: #fff;
+}
+
+.indexContainer {
+    z-index: -2000;
+    display: grid;
+    //grid-template-rows: 90vh min-content min-content min-content 100vh;
+    grid-template-rows: 90vh min-content min-content minmax(100vh, 100%);
+    grid-template-columns: $template-columns;
+
+    @media only screen and (max-width: $bp-medium) {
+    grid-template-rows: 90vh min-content min-content min-content min-content;
+    }
+}

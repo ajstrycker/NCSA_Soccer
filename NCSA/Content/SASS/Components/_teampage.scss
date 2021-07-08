@@ -1,0 +1,50 @@
+﻿.teampage {
+    display: grid;
+    grid-template-rows: 20vh min-content;
+    grid-template-columns: $template-columns;
+    grid-row-gap: 7rem;
+
+    &__teams {
+        grid-column: center-start / center-end;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+        justify-items: center;
+        align-items: stretch;
+        justify-content: flex-start;
+
+        &__team {
+            width: 40rem;
+            margin: 5rem;
+            padding: 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &-desc {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: $color-primary;
+                margin-bottom: 3rem;
+            }
+
+            &-attr {
+                font-size: 1.75rem;
+                font-weight: 500;
+                align-self: flex-start;
+                color: $color-grey-dark-2;
+
+                span {
+                    font-weight: 700;
+                }
+            }
+
+            &-list {
+                font-size: 1.75rem;
+                font-weight: 500;
+                align-self: flex-start;
+                margin: .5rem 0 .5rem 3rem;
+            }
+        }
+    }
+}

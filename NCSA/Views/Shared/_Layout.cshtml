@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Walkerton NCSA</title>
+
+    <link rel="icon" href="~/Content/Images/favicon.ico"/>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navigation">
+        <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+        <label for="navi-toggle" class="navigation__button">
+            <span class="navigation__icon">&nbsp;</span>
+        </label>
+        <div class="navigation__background">&nbsp;</div>
+        <nav class="navigation__nav">
+            <ul class="navigation__list">
+                <li class="navigation__item"><a href="/home/index" class="navigation__item__link"><i class="fa fa-home mr-sm"></i>Home</a></li>
+                <li class="navigation__item"><a href="/home/team" class="navigation__item__link"><i class="fa fa-users mr-sm"></i>Teams</a></li>
+                <li class="navigation__item"><a href="/home/schedule" class="navigation__item__link"><i class="fa fa-calendar mr-sm"></i>Main Schedule</a></li>
+                <li class="navigation__item"><a href="/home/locations" class="navigation__item__link"><i class="fa fa-map mr-sm"></i>Locations</a></li>
+                @if (User.IsInRole(NCSA.Models.RoleName.Referee))
+                {
+                    <li class="navigation__item"><a href="/admin/referee" class="navigation__item__link"><i class="fa fa-user-shield mr-sm"></i>Admin</a></li>
+                }
+                else
+                {
+                    <li class="navigation__item"><a href="/admin" class="navigation__item__link"><i class="fa fa-user-shield mr-sm"></i>Admin</a></li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoff" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <li class="navigation__item">
+                            <a href="javascript:$('#logoff').submit();" class="navigation__item__link"><i class="fa fa-sign-out-alt mr-sm"></i>Logout</a>
+                            <a href="/manage/changepassword" class="navigation__item__link"><i class="fa fa-lock mr-sm"></i>Change Password</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </nav>
+    </div>
+    <div class="alerts">
+    </div>
+    <main>
+        @RenderBody()
+    </main>
+    @Scripts.Render("~/bundles/scripts")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

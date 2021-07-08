@@ -1,0 +1,85 @@
+﻿@model NCSA.ViewModel.ScheduleVM
+
+@{
+    ViewBag.Title = "Schedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="schedule">
+    <div class="schedule__header">
+        <div class="schedule__header-title">
+            NCSA Main Schedule
+        </div>
+    </div>
+
+    @{ var year = DateTime.Now.Year; }
+    @for (int month = 1; month <= 12; month++)
+    {
+        var monthName = new DateTime(year, month, 1).ToString("MMMM");
+
+        <div class="schedule__calendar hideCalendar">
+            <div class="schedule__calendar-month">@monthName</div>
+            <div class="schedule__calendar-head">Sunday</div>
+            <div class="schedule__calendar-head">Monday</div>
+            <div class="schedule__calendar-head">Tuesday</div>
+            <div class="schedule__calendar-head">Wednesday</div>
+            <div class="schedule__calendar-head">Thursday</div>
+            <div class="schedule__calendar-head">Friday</div>
+            <div class="schedule__calendar-head">Saturday</div>
+
+            @{ int count = 1;
+                var dayOfWeek = new DateTime(year, month, 1);
+            }
+
+            @for (int i = 0; i < 7; i++)
+            {
+                if (((int)dayOfWeek.DayOfWeek) == i)
+                {
+                    break;
+                }
+                else
+                {
+                    <div class="schedule__calendar-nodate gr-1"></div>
+
+                    count++;
+                }
+            }
+
+            @for (var date = new DateTime(DateTime.Now.Year, month, 1); date.Month == month; date = date.AddDays(1))
+            {
+                <div class="schedule__calendar-body" onclick="GoToDay('@date')">
+                    <div class="date">@date.Day</div>
+                    @{ var games = Model.Games.Where(c => c.GameDateTime.Date == date.Date).ToList();}
+                    @if (games != null)
+                    {
+                        foreach (var game in games.Take(3))
+                        {
+                            <div class="game @game.HomeTeamName.ToLower()-full">@game.GradeLevel @game.HomeTeamName vs @game.AwayTeamName</div>
+                        }
+
+                        if (games.Count > 3)
+                        {
+                            <div class="dots">...</div>
+                        }
+                    }
+                </div>
+
+                count++;
+            }
+        </div>
+    }
+
+    <div class="schedule-arrowleft">
+        <i class="fa fa-arrow-alt-circle-left" onclick="ChangeMonth('back');"></i>
+    </div>
+
+    <div class="schedule-arrowright">
+        <i class="fa fa-arrow-alt-circle-right" onclick="ChangeMonth('forward');"></i>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/Schedule.js")"></script>
+}

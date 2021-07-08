@@ -1,0 +1,49 @@
+﻿.admin__nav {
+    grid-column: full-start / full-end;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+
+    &-item {
+        margin: 5rem 0;
+        padding: 0 2rem;
+        color: $color-grey-dark-2;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: all .2s;
+        text-decoration: none;
+
+        &:after {
+            content: '';
+            display: block;
+            margin: auto;
+            height: 3px;
+            width: 0px;
+            background: transparent;
+            transition: width .5s ease, background-color .5s ease;
+        }
+
+        &:hover:after {
+            width: 100%;
+            background: $color-primary;
+        }
+
+        &:hover {
+            text-decoration: none;
+            color: $color-primary;
+        }
+    }
+
+    &-active {
+        &:after {
+            width: 100%;
+            background: $color-primary;
+        }
+    }
+
+    @media only screen and (max-width: $bp-small) {
+        &-item {
+            margin: 2rem 0 0 0;
+        }
+    }
+}

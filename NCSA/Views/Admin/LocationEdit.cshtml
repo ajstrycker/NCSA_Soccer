@@ -1,0 +1,60 @@
+﻿@model NCSA.Models.Location
+@{
+    ViewBag.Title = "AdminLocations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin">
+    <div class="common-header">
+        <div class="common-header-title">
+            Edit Location - @Model.StreetName
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__edit">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "" })
+            @Html.HiddenFor(model => model.ID)
+
+            <a href="/admin/locations" class="admin__edit__link">&larr; Back to All Locations</a>
+
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.StreetName, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.StreetName, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.StreetName, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.City, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.State, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Zip, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Longitude, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "adminLabel" })
+                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "adminInput", spellcheck = "false" } })
+                @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "validation-error" })
+            </div>
+            <div class="adminInputGroup">
+                <input type="submit" value="Submit" class="bttn bttn-secondary" />
+            </div>
+        }
+    </div>
+</div>

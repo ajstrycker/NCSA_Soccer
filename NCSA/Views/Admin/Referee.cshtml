@@ -1,0 +1,106 @@
+﻿@model NCSA.ViewModel.RefereeVM
+@{
+    ViewBag.Title = "AdminReferee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="admin">
+    @Html.AntiForgeryToken()
+
+    <div class="common-header">
+        <div class="common-header-title">
+            Referee
+        </div>
+    </div>
+
+    @Html.Partial("AdminNav")
+
+    <div class="admin__container">
+        <div class="admin__container__game" id="assigned">
+            <div class="admin__container__game-title">My Assigned Games</div>
+
+            @if (string.IsNullOrEmpty(Model.UserFullName))
+            {
+                <div class="admin__container__game-msg">Please contact the site admin to add your name so you can assign yourself games.</div>
+            }
+            else
+            {
+                if (Model.GamesAssignedTo.Count > 0)
+                {
+                    <div class="admin__container__game-highlight">
+                        In order to be removed from games, please contact Jeff Strycker. This is to ensure he is aware of referee changes.
+                    </div>
+
+                    foreach (var game in Model.GamesAssignedTo)
+                    {
+                        <div class="admin__container__item common-box">
+                            <div class="admin__container__item-attr">
+                                <span class="admin__container__item-date" id="adate_@game.GameId">@game.GameDateTime</span>
+                            </div>
+                            <div class="admin__container__item-attr" id="adesc_@game.GameId">
+                                <span>Game:</span> @game.GameDescription
+                            </div>
+                            <div class="admin__container__item-attr" id="acenter_@game.GameId">
+                                <span>Center Ref:</span> @game.CenterRef
+                            </div>
+                            <div class="admin__container__item-attr" id="aar1_@game.GameId">
+                                <span>AR1:</span> @game.AR1
+                            </div>
+                            <div class="admin__container__item-attr" id="aar2_@game.GameId">
+                                <span>AR2:</span> @game.AR2
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="admin__container__game-highlight">
+                        You are not currently signed up for any games
+                    </div>
+                }
+            }
+
+        </div>
+
+        <div class="admin__container__game">
+            <div class="admin__container__game-title" id="opengames">Open Games</div>
+
+            @if (Model.OpenGames.Count > 0)
+            {
+                foreach (var game in Model.OpenGames)
+                {
+                    <div class="admin__container__item common-box" id="open_@game.GameId">
+                        <div class="admin__container__item-attr">
+                            <span class="admin__container__item-date" id="udate_@game.GameId">@game.GameDateTime</span>
+                        </div>
+                        <div class="admin__container__item-attr" id="udesc_@game.GameId">
+                            <span>Game:</span> @game.GameDescription
+                        </div>
+                        <div class="admin__container__item-attr" id="ucenter_@game.GameId">
+                            <span>Center:</span> @game.CenterRef
+                        </div>
+                        <div class="admin__container__item-attr" id="uar1_@game.GameId">
+                            <span>AR1:</span> @game.AR1
+                        </div>
+                        <div class="admin__container__item-attr" id="uar2_@game.GameId">
+                            <span>AR2:</span> @game.AR2
+                        </div>
+                        @if (!string.IsNullOrEmpty(Model.UserFullName))
+                        {
+                            <div class="admin__container__item-attr" id="btn_@game.GameId">
+                                <a class="bttn bttn-link" onclick="RefereeSelect('@game.GameId')">Assign Me / Choose Position</a>
+                            </div>
+                        }
+
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="admin__container__game-highlight">
+                    There are currently no open games
+                </div>
+            }
+        </div>
+    </div>
+</div>
